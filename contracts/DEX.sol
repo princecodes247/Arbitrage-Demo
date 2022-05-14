@@ -15,6 +15,9 @@ contract DEX {
     uint256 numerator;
     uint256 denominator;
 
+    // Set max swap limit since these are for education purposes
+    uint256 maxSwapLimit = 100;
+
     constructor(address _tokenA, address _tokenB, uint256 _numerator, uint256 _denominator) {
         tokenA_Address = _tokenA;
         tokenA = Token(address(tokenA_Address));
@@ -35,6 +38,7 @@ contract DEX {
     function swapAForB(uint _amount) public {
         require(tokenA.balanceOf(msg.sender) >= _amount, "You need more Token A");
         require(_amount > 0, "You need to sell at least some tokens");
+        require(_amount <= maxSwapLimit, "You've exceeded the max swap limit!");
         uint256 approvedAmt = tokenA.allowance(msg.sender, address(this));
         require(approvedAmt >= _amount, "Check the token allowance");
 
@@ -46,6 +50,7 @@ contract DEX {
     function swapBForA(uint _amount) public {
         require(tokenB.balanceOf(msg.sender) >= _amount, "You need more Token B");
         require(_amount > 0, "You need to sell at least some tokens");
+        require(_amount <= maxSwapLimit, "You've exceeded the max swap limit!");
         uint256 approvedAmt = tokenB.allowance(msg.sender, address(this));
         require(approvedAmt >= _amount, "Check the token allowance");
 
