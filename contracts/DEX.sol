@@ -16,7 +16,7 @@ contract DEX {
     uint256 denominator;
 
     // Set max swap limit since these are for education purposes
-    uint256 maxSwapLimit = 100;
+    uint256 maxSwapLimit = 1000;
 
     constructor(address _tokenA, address _tokenB, uint256 _numerator, uint256 _denominator) {
         tokenA_Address = _tokenA;
