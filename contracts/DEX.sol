@@ -2,31 +2,32 @@
 
 pragma solidity ^0.8.4;
 
-import "./TokenA.sol";
-import "./TokenB.sol";
+import "./Token.sol";
 
-contract NotUniSwap {
+contract DEX {
 
-    TokenA tokenA;
+    Token tokenA;
     address public tokenA_Address;
 
-    TokenB tokenB;
+    Token tokenB;
     address public tokenB_Address;
 
+    uint256 numerator;
+    uint256 denominator;
 
-
-    constructor(address _tokenA, address _tokenB) {
+    constructor(address _tokenA, address _tokenB, uint256 _numerator, uint256 _denominator) {
         tokenA_Address = _tokenA;
-        tokenA = TokenA(address(tokenA_Address));
+        tokenA = Token(address(tokenA_Address));
 
         tokenB_Address = _tokenB;
-        tokenB = TokenB(address(tokenB_Address));
+        tokenB = Token(address(tokenB_Address));
+
+        numerator = _numerator;
+        denominator = _denominator;
     }
 
         // Get Token A to B ratio
-        function getAToBRatio() public pure returns (uint256) {
-            uint256 numerator = 10;
-        uint256 denominator = 18;
+    function getAToBRatio() public view returns (uint256) {
         return numerator / denominator;
     }
 

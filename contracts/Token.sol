@@ -2,14 +2,15 @@
 
 pragma solidity ^0.8.4;
 
-contract TokenB {
-   
+contract Token {
+
     mapping(address => uint256) balances;
     mapping(address => mapping(address => uint256)) allowed;
     string name_;
     string symbol_;
     uint256 totalSupply_;
 
+   
     constructor(
         string memory _name,
         string memory _symbol,
