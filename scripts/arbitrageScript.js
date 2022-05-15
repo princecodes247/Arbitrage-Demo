@@ -29,11 +29,11 @@ async function main() {
 //   Deploy DEX contracts
   const DEX = await hre.ethers.getContractFactory("DEX");
 
- const NotUniSwap = await DEX.deploy(tokenA_Address, tokenB_Address, 5, 9);
+ const NotUniSwap = await DEX.deploy(tokenA_Address, tokenB_Address, 5, 10);
  await NotUniSwap.deployed();
 console.log("NotUniSwap deployed to: ", NotUniSwap.address)
 
- const NotPancakeSwap = await DEX.deploy(tokenA_Address, tokenB_Address, 5, 10);
+ const NotPancakeSwap = await DEX.deploy(tokenA_Address, tokenB_Address, 5, 9);
  await NotPancakeSwap.deployed();
 console.log("NotPancakeSwap deployed to: ", NotPancakeSwap.address)
 
