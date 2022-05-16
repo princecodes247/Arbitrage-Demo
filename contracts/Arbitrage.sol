@@ -3,7 +3,9 @@
 pragma solidity ^0.8.4;
 
 import "./Token.sol";
-import "./DEX_Interface.sol"
+import "./DEX_Interface.sol";
+
+
 contract Arbitrage {
 
     Token tokenA;
@@ -11,15 +13,15 @@ contract Arbitrage {
     Token tokenB;
     address public tokenB_Address;
 
-    DEX_Interface dex1;
+    DEX_INTERFACE dex1;
     address public dex1_Address;
-    DEX_Interface dex2;
+    DEX_INTERFACE dex2;
     address public dex2_Address;
     constructor(address DEX1, address DEX2, address _tokenA, address _tokenB) {
         tokenA = Token(_tokenA);
         tokenB = Token(_tokenB);
-        dex1 = DEX_Interface(DEX1);
-        dex2 = DEX_Interface(DEX2);
+        dex1 = DEX_INTERFACE(DEX1);
+        dex2 = DEX_INTERFACE(DEX2);
     }
 
     // Fund Contract with Token A
