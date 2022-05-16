@@ -32,11 +32,18 @@ async function main() {
  const NotUniSwap = await DEX.deploy(tokenA_Address, tokenB_Address, 5, 10);
  await NotUniSwap.deployed();
 console.log("NotUniSwap deployed to: ", NotUniSwap.address)
-
+let dex1_Address = NotUniSwap.address;
  const NotPancakeSwap = await DEX.deploy(tokenA_Address, tokenB_Address, 5, 9);
  await NotPancakeSwap.deployed();
-console.log("NotPancakeSwap deployed to: ", NotPancakeSwap.address)
+ console.log("NotPancakeSwap deployed to: ", NotPancakeSwap.address)
+ let dex2_Address = NotPancakeSwap.address;
 
+
+//   Deploy Arbitrage contract
+  const Arbitrage = await hre.ethers.getContractFactory("Arbitrage");
+  const arbitrage = await Arbitrage.deploy(dex1_Address, dex2_Address, tokenA_Address, tokenB_Address);
+  await arbitrage.deployed();
+  console.log("Arbitrage deployed to: ", arbitrage.address);
 
 }
 
