@@ -10,7 +10,6 @@ contract Token {
     string symbol_;
     uint256 totalSupply_;
 
-   
     constructor(
         string memory _name,
         string memory _symbol,
@@ -43,7 +42,7 @@ contract Token {
     }
 
     function transfer(address _receiver, uint _amount) public returns (bool) {
-        require(_amount <= balances[msg.sender]);
+        require(_amount <= balances[msg.sender], "Insufficient balance");
         balances[msg.sender] -= _amount;
         balances[_receiver] += _amount;
         return true;
@@ -67,8 +66,8 @@ contract Token {
         address _receiver,
         uint _amount
     ) public returns (bool) {
-        require(_amount <= balances[_owner]);
-        require(_amount <= allowed[_owner][msg.sender]);
+        require(_amount <= balances[_owner], "Insufficient balance");
+        require(_amount <= allowed[_owner][msg.sender], "Insufficient allowance");
         balances[_owner] -= _amount;
         allowed[_owner][msg.sender] -= _amount;
         balances[_receiver] += _amount;
