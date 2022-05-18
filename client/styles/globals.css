@@ -1,3 +1,11 @@
+:root {
+  --primary-color: hsl(215, 79%, 62%);
+  --primary-color--dim: rgba(21, 61, 111, 0.44);
+  --secondary-color: #ffc107;
+
+  --primary-background-color: #333;
+  --secondary-background-color: #444;
+}
 html,
 body {
   padding: 0;
