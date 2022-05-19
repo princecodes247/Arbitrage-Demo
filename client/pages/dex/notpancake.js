@@ -1,14 +1,72 @@
 import Head from "next/head";
 import Image from "next/image";
+import { BigNumber, providers, utils } from "ethers";
 import styles from "../../styles/Dex.module.css";
 import React, { useEffect, useRef, useState } from "react";
+import Web3Modal from "web3modal";
 
 export default function NotPancakeSwap() {
   const [loading, setLoading] = useState(false);
-  const [ethBalance, setEtherBalance] = useState(zero);
+
+  const [ethBalance, setEtherBalance] = useState(0);
+  const [etherBalanceContract, setEtherBalanceContract] = useState(0);
+
+
   const web3ModalRef = useRef();
   // walletConnected keep track of whether the user's wallet is connected or not
   const [walletConnected, setWalletConnected] = useState(false);
+
+  const connectWallet = async () => {
+    try {
+      // Get the provider from web3Modal, which in our case is MetaMask
+      // When used for the first time, it prompts the user to connect their wallet
+      await getProviderOrSigner();
+      setWalletConnected(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getProviderOrSigner = async (needSigner = false) => {
+    // Connect to Metamask
+    // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider);
+
+    // If user is not connected to the Rinkeby network, let them know and throw an error
+    const { chainId } = await web3Provider.getNetwork();
+    if (chainId !== 4) {
+      window.alert("Change the network to Rinkeby");
+      throw new Error("Change network to Rinkeby");
+    }
+
+    if (needSigner) {
+      const signer = web3Provider.getSigner();
+      return signer;
+    }
+    return web3Provider;
+  };
+
+  const getAmounts = async () => {
+    try {
+      const provider = await getProviderOrSigner(false);
+      const signer = await getProviderOrSigner(true);
+      const address = await signer.getAddress();
+      // get the amount of eth in the user's account
+      const _ethBalance = await getEtherBalance(provider, address);
+     
+      // Get the ether reserves in the contract
+      const _ethBalanceContract = await getEtherBalance(provider, null, true);
+      setEtherBalance(_ethBalance);
+      setEtherBalanceContract(_ethBalanceContract);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const performSwap = () => {
+    
+  }
 
   useEffect(() => {
     // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
@@ -20,8 +78,8 @@ export default function NotPancakeSwap() {
         providerOptions: {},
         disableInjectedProvider: false,
       });
-      connectWallet();
-      getAmounts();
+      // connectWallet();
+      // getAmounts();
     }
   }, [walletConnected]);
 
@@ -36,12 +94,18 @@ export default function NotPancakeSwap() {
           Connect your wallet
         </button>
       );
-    }
+    } 
 
     // If we are currently waiting for something, return a loading button
     if (loading) {
       return <button className={styles.formMainButton}>Loading...</button>;
     }
+
+    return (
+      <button onClick={performSwap} className={styles.formMainButton}>
+          Swap
+        </button>
+    )
   };
 
 

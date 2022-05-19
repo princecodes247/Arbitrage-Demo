@@ -1,0 +1,140 @@
+.container {
+    height: 100vh;
+    background: radial-gradient(50% 50% at 50% 50%,rgba(252, 7, 125, 0.1) 0,hsl(0, 0%, 50%) 100%);
+    
+}
+.header {
+    display: flex;
+    height: 10vh;
+    justify-content: space-between;
+    padding: 1em;
+    align-items: center;
+}
+
+.headerRight {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.headerCenter {
+    border: 2px solid #000;
+    background-color: #555;
+    padding: 0.4em 0.7em;
+    border-radius: 15px;
+}
+
+.networkDropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #555;
+    border: 2px solid #000;
+    border-radius: 15px;
+    padding: 0.4em 0.7em;
+}
+
+.connectButton {
+    background-color: #555;
+    border: 2px solid #000;
+    border-radius: 15px;
+    padding: 0.4em 0.7em;
+    cursor: pointer;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* width: 100%; */
+    height: 100%;
+    border: 1px solid red;
+    background: #111;
+    padding: 1em;
+    border-radius: 15px;
+    color: #fff;
+}
+.formHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.formBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.formLabel {
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background: #333;
+    padding: 1em 0.5em;
+    padding-bottom: 0em;
+    width: 100%;
+    border: 1px solid #fff0;
+    border-radius: 15px;
+}
+.formLabel:hover, .formLabel:focus, .formLabel:focus-within {
+   
+    border: 1px solid #ffff;
+}
+
+.formInput {
+    background: transparent;
+    border: none;
+    caret-color: #fff;
+    color: #fff;
+    font-size: 1.6em;
+}
+
+.formInput:focus {
+    outline: none;
+}
+
+.formButton {
+    
+    cursor: pointer;
+
+}
+.formCenterButton {
+    margin: -20px 0;
+    margin-bottom: -20px;
+    padding: 1em;
+    background: #555;
+    position: relative;
+    z-index: 10;
+    border: 5px solid #000;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.formCenterButton:hover {
+    opacity: 0.8;
+}
+
+.formMainButton {
+    width: 100%;
+    padding: 1.2em 2em;
+    margin: 1em;
+    background: var(--primary-color--dim);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 600;
+}
